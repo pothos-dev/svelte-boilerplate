@@ -5,10 +5,15 @@ import preprocess from 'svelte-preprocess'
 const config = {
   // Consult https://github.com/sveltejs/svelte-preprocess
   // for more information about preprocessors
-  preprocess: preprocess(),
+  preprocess: [preprocess({ postcss: true })],
 
   kit: {
     adapter: adapter(),
+    alias: { '~': 'src' },
+    vite: {
+      // Run on 443 port for better support in Github Cospaces
+      server: { hmr: { clientPort: 443 } },
+    },
   },
 }
 
