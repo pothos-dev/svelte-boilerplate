@@ -1,5 +1,6 @@
 import adapter from '@sveltejs/adapter-auto'
 import preprocess from 'svelte-preprocess'
+import path from "path"
 
 /** @type {import('@sveltejs/kit').Config} */
 const config = {
@@ -9,9 +10,8 @@ const config = {
 
   kit: {
     adapter: adapter(),
-    alias: { '~': 'src' },
     vite: {
-      // Run on 443 port for better support in Github Cospaces
+      resolve: { alias: { '~': path.resolve('src') }, },
       server: { hmr: { clientPort: 443 } },
     },
   },
