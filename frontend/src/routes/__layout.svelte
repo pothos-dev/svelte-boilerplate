@@ -1,7 +1,11 @@
 <script>
-  import '../app.css'
+import ScreenContainer from '~/components/ScreenContainer.svelte'
+import ScreenHeader from '~/components/ScreenHeader.svelte'
+
+import '../app.css'
 </script>
 
-<div data-theme="dark" class="h-screen p-4">
+<ScreenContainer>
+  <ScreenHeader />
   <slot />
-</div>
+</ScreenContainer>

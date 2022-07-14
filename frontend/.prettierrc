@@ -4,5 +4,7 @@
   "trailingComma": "es5",
   "semi": false,
   "arrowParens": "avoid",
-  "printWidth": 100
+  "printWidth": 100,
+  "svelteStrictMode": true,
+  "svelteIndentScriptAndStyle": false
 }
