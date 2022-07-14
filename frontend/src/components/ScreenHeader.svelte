@@ -1,5 +1,6 @@
 <script>
-import AuthButton from '~/features/Authentication/components/AuthButton.svelte'
+import LoginButton from '~/features/Authentication/components/LoginButton.svelte'
+import UserMenu from '~/features/Authentication/components/UserMenu.svelte'
 </script>
 
 <div class="flex flex-row items-center justify-between bg-primary p-2">
@@ -10,6 +11,7 @@ import AuthButton from '~/features/Authentication/components/AuthButton.svelte'
 
   <div>
     <!-- Right -->
-    <AuthButton />
+    <LoginButton />
+    <UserMenu />
   </div>
 </div>
