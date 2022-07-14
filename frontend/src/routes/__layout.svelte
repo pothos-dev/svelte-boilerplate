@@ -6,6 +6,5 @@ import '../app.css'
 </script>
 
 <ScreenContainer>
-  <ScreenHeader />
   <slot />
 </ScreenContainer>
