@@ -2,7 +2,7 @@
 import ScreenHeader from './ScreenHeader.svelte'
 </script>
 
-<div data-theme="dark" class="h-screen">
+<div data-theme="dark" class="h-screen overflow-hidden">
   <ScreenHeader />
   <div class="px-2 py-4">
     <slot />

@@ -1,5 +1,4 @@
 <script>
-import AuthAvatar from '~/features/Authentication/components/AuthAvatar.svelte'
 import AuthButton from '~/features/Authentication/components/AuthButton.svelte'
 </script>
 
@@ -12,6 +11,5 @@ import AuthButton from '~/features/Authentication/components/AuthButton.svelte'
   <div>
     <!-- Right -->
     <AuthButton />
-    <AuthAvatar />
   </div>
 </div>
