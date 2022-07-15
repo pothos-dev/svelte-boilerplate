@@ -29,35 +29,35 @@
 </div>
 
 <script lang="ts" context="module">
-import { readDataOrNull, writeData } from '~/lib/firebase/firestore'
+  import { readDataOrNull, writeData } from '~/lib/firebase/firestore'
 
-type Profile = {
-  userName: string
-  firstName: string
-  lastName: string
-}
-
-export async function load() {
-  return {
-    props: {
-      profile: await readDataOrNull<Profile>('users/me'),
-    },
+  type Profile = {
+    userName: string
+    firstName: string
+    lastName: string
   }
-}
+
+  export async function load() {
+    return {
+      props: {
+        profile: await readDataOrNull<Profile>('users/me'),
+      },
+    }
+  }
 </script>
 
 <script lang="ts">
-export let profile: Profile | undefined
+  export let profile: Profile | undefined
 
-let userName = profile?.userName ?? ''
-let firstName = profile?.firstName ?? ''
-let lastName = profile?.lastName ?? ''
+  let userName = profile?.userName ?? ''
+  let firstName = profile?.firstName ?? ''
+  let lastName = profile?.lastName ?? ''
 
-async function submit() {
-  await writeData('users/me', {
-    userName,
-    firstName,
-    lastName,
-  })
-}
+  async function submit() {
+    await writeData('users/me', {
+      userName,
+      firstName,
+      lastName,
+    })
+  }
 </script>

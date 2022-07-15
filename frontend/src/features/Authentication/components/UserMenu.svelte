@@ -32,15 +32,15 @@
 {/if}
 
 <script lang="ts">
-import { goto } from '$app/navigation'
-import { currentUser } from '~/features/Authentication/states'
-import { auth } from '~/lib/firebase/auth'
+  import { goto } from '$app/navigation'
+  import { currentUser } from '~/features/Authentication/states'
+  import { auth } from '~/lib/firebase/auth'
 
-function gotoProfile() {
-  goto('/profile')
-}
+  function gotoProfile() {
+    goto('/profile')
+  }
 
-function logout() {
-  auth.signOut()
-}
+  function logout() {
+    auth.signOut()
+  }
 </script>

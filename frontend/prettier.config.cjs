@@ -7,7 +7,7 @@ module.exports = {
   printWidth: 100,
 
   svelteStrictMode: true,
-  svelteIndentScriptAndStyle: false,
+  svelteIndentScriptAndStyle: true,
   svelteSortOrder: 'markup-scripts-styles',
 
   tailwindConfig: './tailwind.config.cjs',
