@@ -11,5 +11,5 @@ function login() {
 </script>
 
 {#if browser && $currentUser === null}
-  <button class="btn" on:click="{login}">login</button>
+  <button class="btn" on:click="{login}">Login</button>
 {/if}

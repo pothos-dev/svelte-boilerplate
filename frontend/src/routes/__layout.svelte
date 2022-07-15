@@ -1,10 +1,11 @@
 <script>
-import ScreenContainer from '~/components/ScreenContainer.svelte'
-import ScreenHeader from '~/components/ScreenHeader.svelte'
+import AppContainer from '~/components/AppContainer.svelte'
 
+// This import enables icons via `<span class="iconify" data-icon="icon-name"/>`
+import Iconify from '@iconify/iconify'
 import '../app.css'
 </script>
 
-<ScreenContainer>
+<AppContainer>
   <slot />
-</ScreenContainer>
+</AppContainer>

@@ -1,9 +1,9 @@
 <script>
-import ScreenHeader from './ScreenHeader.svelte'
+import AppHeader from './AppHeader.svelte'
 </script>
 
 <div data-theme="dark" class="h-screen overflow-hidden">
-  <ScreenHeader />
+  <AppHeader />
   <div class="px-2 py-4">
     <slot />
   </div>
