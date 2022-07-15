@@ -8,6 +8,7 @@ module.exports = {
 
   svelteStrictMode: true,
   svelteIndentScriptAndStyle: false,
+  svelteSortOrder: 'markup-scripts-styles',
 
   tailwindConfig: './tailwind.config.cjs',
   plugins: [require('prettier-plugin-tailwindcss')],

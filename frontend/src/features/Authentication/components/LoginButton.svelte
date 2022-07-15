@@ -1,3 +1,7 @@
+{#if browser && $currentUser === null}
+  <button class="btn" on:click="{login}">Login</button>
+{/if}
+
 <script lang="ts">
 import { browser } from '$app/env'
 
@@ -9,7 +13,3 @@ function login() {
   signInWithPopup(auth, new GoogleAuthProvider())
 }
 </script>
-
-{#if browser && $currentUser === null}
-  <button class="btn" on:click="{login}">Login</button>
-{/if}

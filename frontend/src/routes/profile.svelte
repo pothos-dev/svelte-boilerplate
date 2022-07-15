@@ -1,3 +1,33 @@
+<div class="form-control w-full max-w-md gap-2">
+  <label class="input-group">
+    <span>@</span>
+    <input
+      class="input input-bordered w-full"
+      type="text"
+      placeholder="username"
+      bind:value="{userName}"
+    />
+  </label>
+
+  <input
+    class="input input-bordered w-full"
+    type="text"
+    placeholder="First name"
+    bind:value="{firstName}"
+  />
+  <input
+    class="input input-bordered w-full"
+    type="text"
+    placeholder="Last name"
+    bind:value="{lastName}"
+  />
+
+  <button class="btn gap-2" on:click="{submit}">
+    <span class="iconify" data-icon="material-symbols:save-outline"></span>
+    Save profile
+  </button>
+</div>
+
 <script lang="ts" context="module">
 import { readDataOrNull, writeData } from '~/lib/firebase/firestore'
 
@@ -31,33 +61,3 @@ async function submit() {
   })
 }
 </script>
-
-<div class="form-control w-full max-w-md gap-2">
-  <label class="input-group">
-    <span>@</span>
-    <input
-      class="input input-bordered w-full"
-      type="text"
-      placeholder="username"
-      bind:value="{userName}"
-    />
-  </label>
-
-  <input
-    class="input input-bordered w-full"
-    type="text"
-    placeholder="First name"
-    bind:value="{firstName}"
-  />
-  <input
-    class="input input-bordered w-full"
-    type="text"
-    placeholder="Last name"
-    bind:value="{lastName}"
-  />
-
-  <button class="btn gap-2" on:click="{submit}">
-    <span class="iconify" data-icon="material-symbols:save-outline"></span>
-    Save profile
-  </button>
-</div>

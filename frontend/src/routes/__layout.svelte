@@ -1,3 +1,7 @@
+<AppContainer>
+  <slot />
+</AppContainer>
+
 <script>
 import AppContainer from '~/components/AppContainer.svelte'
 
@@ -5,7 +9,3 @@ import AppContainer from '~/components/AppContainer.svelte'
 import Iconify from '@iconify/iconify'
 import '../app.css'
 </script>
-
-<AppContainer>
-  <slot />
-</AppContainer>
