@@ -13,7 +13,13 @@ async function logout() {
   <!-- Menu Container -->
   <div class="dropdown-end dropdown">
     <!-- Avatar Icon -->
-    <img class="h-10 w-10 rounded-full" tabindex="0" src="{photoURL}" alt="{displayName}" />
+    <button tabindex="0" class="btn-circle">
+      <div class="avatar">
+        <div class="w-10 rounded-full">
+          <img src="{photoURL}" alt="{displayName}" />
+        </div>
+      </div>
+    </button>
 
     <!-- Menu Content -->
     <ul tabindex="0" class="dropdown-content menu rounded-md bg-base-100 p-2 shadow">
