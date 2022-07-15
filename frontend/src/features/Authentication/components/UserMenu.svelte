@@ -1,9 +1,14 @@
 <script lang="ts">
+import { goto } from '$app/navigation'
 import { currentUser } from '~/features/Authentication/states'
 import { auth } from '~/lib/firebase/auth'
 
-async function logout() {
-  await auth.signOut()
+function gotoProfile() {
+  goto('/profile')
+}
+
+function logout() {
+  auth.signOut()
 }
 </script>
 
@@ -24,7 +29,7 @@ async function logout() {
     <!-- Menu Content -->
     <ul tabindex="0" class="dropdown-content menu rounded-md bg-base-100 p-2 shadow">
       <li>
-        <div>
+        <div on:click="{gotoProfile}">
           <span class="iconify" data-icon="material-symbols:person-outline"></span>
           Profile
         </div>
