@@ -39,6 +39,8 @@
 <script context="module" lang="ts">
   import type { Load } from "@sveltejs/kit"
   import { readDataOrNull, writeData } from "~/lib/firebase/firestore"
+  import { createForm } from "svelte-forms-lib"
+  import { session } from "$app/stores"
 
   type Profile = {
     userName: string
@@ -47,17 +49,13 @@
   }
 
   export const load: Load = async ({ session }) => {
-    return {
-      props: {
-        profile: await readDataOrNull<Profile>("users/me"),
-      },
-    }
+    const email = session.user.email
+    const profile = await readDataOrNull<Profile>("users/" + email)
+    return { props: { profile } }
   }
 </script>
 
 <script lang="ts">
-  import { createForm } from "svelte-forms-lib"
-
   export let profile: Profile | null
 
   const { form, handleSubmit, isModified } = createForm({
@@ -67,8 +65,8 @@
       lastName: "",
     },
     async onSubmit(profile) {
-      console.log({ values: profile })
-      await writeData("users/me", profile)
+      const email = $session.user.email
+      await writeData("users/" + email, profile)
     },
   })
 </script>

@@ -1,4 +1,11 @@
-import { getAuth, GoogleAuthProvider, signInWithPopup, type User } from "firebase/auth"
+import { browser } from "$app/env"
+import {
+  getAuth,
+  GoogleAuthProvider,
+  signInWithPopup,
+  type User,
+  inMemoryPersistence,
+} from "firebase/auth"
 import { readable } from "svelte/store"
 import { app } from "./app"
 
@@ -15,7 +22,11 @@ export const currentUser = readable<User | null | undefined>(undefined, set =>
 // Logs in with Google
 export async function login() {
   const { user } = await signInWithPopup(auth, new GoogleAuthProvider())
-  return user
+  const idToken = await user.getIdToken()
+  // TODO CSRF
+
+  // Exchanges the idToken for a session cookie that is used to authenticate this user towards the server.
+  await fetch(`/api/session?idToken=${idToken}`)
 }
 
 // Logs out current user
