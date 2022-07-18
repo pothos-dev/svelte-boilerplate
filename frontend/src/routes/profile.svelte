@@ -1,11 +1,13 @@
-<div class="form-control w-full max-w-md gap-2">
+<form class="form-control w-full max-w-md gap-2" on:submit="{handleSubmit}">
   <label class="input-group">
     <span>@</span>
     <input
       class="input input-bordered w-full"
       type="text"
       placeholder="username"
-      bind:value="{userName}"
+      id="username"
+      name="username"
+      bind:value="{$form.userName}"
     />
   </label>
 
@@ -13,20 +15,26 @@
     class="input input-bordered w-full"
     type="text"
     placeholder="First name"
-    bind:value="{firstName}"
+    id="firstName"
+    name="firstName"
+    bind:value="{$form.firstName}"
   />
   <input
     class="input input-bordered w-full"
     type="text"
     placeholder="Last name"
-    bind:value="{lastName}"
+    id="lastName"
+    name="lastName"
+    bind:value="{$form.lastName}"
   />
 
-  <button class="btn gap-2" on:click="{submit}">
-    <span class="iconify" data-icon="material-symbols:save-outline"></span>
-    Save profile
-  </button>
-</div>
+  {#if $isModified}
+    <button class="btn gap-2" type="submit">
+      <span class="iconify" data-icon="material-symbols:save-outline"></span>
+      Save profile
+    </button>
+  {/if}
+</form>
 
 <script context="module" lang="ts">
   import type { Load } from '@sveltejs/kit'
@@ -39,7 +47,6 @@
   }
 
   export const load: Load = async ({ session }) => {
-    console.log({ session })
     return {
       props: {
         profile: await readDataOrNull<Profile>('users/me'),
@@ -49,13 +56,19 @@
 </script>
 
 <script lang="ts">
+  import { createForm } from 'svelte-forms-lib'
+
   export let profile: Profile | null
 
-  let userName = profile?.userName ?? ''
-  let firstName = profile?.firstName ?? ''
-  let lastName = profile?.lastName ?? ''
-
-  const submit = () => {
-    writeData<Profile>('users/me', { userName, firstName, lastName })
-  }
+  const { form, handleSubmit, isModified } = createForm({
+    initialValues: profile ?? {
+      userName: '',
+      firstName: '',
+      lastName: '',
+    },
+    async onSubmit(profile) {
+      console.log({ values: profile })
+      await writeData('users/me', profile)
+    },
+  })
 </script>
