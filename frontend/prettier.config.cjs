@@ -1,21 +1,21 @@
 module.exports = {
   useTabs: false,
-  singleQuote: true,
-  trailingComma: 'es5',
+  singleQuote: false,
+  trailingComma: "es5",
   semi: false,
-  arrowParens: 'avoid',
+  arrowParens: "avoid",
   printWidth: 100,
 
   svelteStrictMode: true,
   svelteIndentScriptAndStyle: true,
-  svelteSortOrder: 'markup-scripts-styles',
+  svelteSortOrder: "markup-scripts-styles",
 
-  tailwindConfig: './tailwind.config.cjs',
-  plugins: [require('prettier-plugin-tailwindcss')],
+  tailwindConfig: "./tailwind.config.cjs",
+  plugins: [require("prettier-plugin-tailwindcss")],
   overrides: [
     {
-      files: '*.svelte',
-      options: { parser: 'svelte' },
+      files: "*.svelte",
+      options: { parser: "svelte" },
     },
   ],
 }

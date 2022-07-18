@@ -6,5 +6,5 @@
 </div>
 
 <script>
-  import AppHeader from './AppHeader.svelte'
+  import AppHeader from "./AppHeader.svelte"
 </script>

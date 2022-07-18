@@ -8,6 +8,6 @@
 </div>
 
 <script>
-  import LoginButton from '~/features/Authentication/components/LoginButton.svelte'
-  import UserMenu from '~/features/Authentication/components/UserMenu.svelte'
+  import LoginButton from "~/components/auth/LoginButton.svelte"
+  import UserMenu from "~/components/auth/UserMenu.svelte"
 </script>
