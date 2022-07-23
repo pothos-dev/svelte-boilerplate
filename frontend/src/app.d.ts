@@ -12,6 +12,8 @@ declare global {
 
     // interface Locals {}
     // interface Platform {}
-    // interface Stuff {}
+    interface Stuff {
+      preloadedDocuments: { [path: string]: any }
+    }
   }
 }

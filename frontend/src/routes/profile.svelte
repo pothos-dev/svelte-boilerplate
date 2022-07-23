@@ -44,10 +44,12 @@
   </form>
 {/if}
 
-<script lang="ts">
-  import { currentUser } from "~/lib/firebase/auth"
+<script lang="ts" context="module">
   import { browser } from "$app/env"
   import { createFirestoreForm } from "~/lib/forms"
+  import { session } from "$app/stores"
+  import type { Load } from "@sveltejs/kit"
+  import { preloadData } from "~/lib/firebase/firestore"
 
   type Profile = {
     userName: string
@@ -55,8 +57,16 @@
     lastName: string
   }
 
+  export const load: Load = async ({ session }) => {
+    return {
+      stuff: await preloadData("users/" + session.user?.email),
+    }
+  }
+</script>
+
+<script lang="ts">
   const { form, handleSubmit, isModified, isLoaded, errors } = createFirestoreForm<Profile>({
-    path: "users/" + $currentUser?.email,
+    path: "users/" + $session.user?.email,
     initialValues: {
       userName: "",
       firstName: "",
