@@ -3,7 +3,8 @@
 import type { GetSession } from "@sveltejs/kit"
 import { readSessionCookie } from "~/lib/firebase/admin"
 
-// Session interface is extended in app.d.ts
+// Reads the `session` cookie from incoming requests to populate the
+// session object of SvelteKit. (Session interface is extended in app.d.ts)
 export const getSession: GetSession = async ({ request }) => {
   const cookie = request.headers.get("cookie")
   const session = cookie?.match("session=([^;]+)")?.[1]
