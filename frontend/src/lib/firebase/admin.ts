@@ -14,6 +14,11 @@ export async function createSessionCookie(idToken: string) {
 }
 
 // Returns user for session token.
-export async function readSessionCookie(sessionToken: string): Promise<DecodedIdToken> {
-  return await admin.auth().verifySessionCookie(sessionToken, true)
+export async function readSessionCookie(sessionToken: string): Promise<DecodedIdToken | null> {
+  try {
+    return await admin.auth().verifySessionCookie(sessionToken, true)
+  } catch (error) {
+    console.warn(error)
+    return null
+  }
 }

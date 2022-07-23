@@ -1,11 +1,4 @@
-import { browser } from "$app/env"
-import {
-  getAuth,
-  GoogleAuthProvider,
-  signInWithPopup,
-  type User,
-  inMemoryPersistence,
-} from "firebase/auth"
+import { getAuth, GoogleAuthProvider, signInWithPopup, type User } from "firebase/auth"
 import { readable } from "svelte/store"
 import { app } from "./app"
 
@@ -31,5 +24,8 @@ export async function login() {
 
 // Logs out current user
 export async function logout() {
+  // Asks server to delete the session cookie for us (which we can't do here since it is HttpOnly)
+  await fetch("/api/session", { method: "DELETE" })
+
   await auth.signOut()
 }

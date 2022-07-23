@@ -1,13 +1,17 @@
 /// <reference types="@sveltejs/kit" />
 
+import type { DecodedIdToken } from "firebase-admin/lib/auth/token-verifier"
+
 // See https://kit.svelte.dev/docs/types#app
 // for information about these interfaces
-declare namespace App {
-  interface Session {
-    user: DecodedIdToken
-  }
+declare global {
+  declare namespace App {
+    interface Session {
+      user: DecodedIdToken | null
+    }
 
-  // interface Locals {}
-  // interface Platform {}
-  // interface Stuff {}
+    // interface Locals {}
+    // interface Platform {}
+    // interface Stuff {}
+  }
 }
