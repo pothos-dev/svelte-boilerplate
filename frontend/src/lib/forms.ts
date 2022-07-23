@@ -3,7 +3,11 @@ import { createForm } from "svelte-forms-lib"
 import { writable, type Readable } from "svelte/store"
 import { getPreloadedDataOrNull, readDataOrNull, writeData } from "~/lib/firebase/firestore"
 
-type FormProps<T> = Omit<Parameters<typeof createForm<T>>[0], "onSubmit"> & {
+// We extend the signature of `createForm` from `svelte-forms-lib` by adding the path
+// of the document that contains our form state.
+// Submitting the form also automatically updates the document.
+type SvelteFormsProps<T> = Parameters<typeof createForm<T>>[0]
+type FormProps<T> = Omit<SvelteFormsProps<T>, "onSubmit"> & {
   path: string
 }
 export function createFirestoreForm<T>({
@@ -12,29 +16,27 @@ export function createFirestoreForm<T>({
   validate,
   validationSchema,
 }: FormProps<T>) {
-  const formResult = createForm({
-    initialValues,
+  const preloadedValues = getPreloadedDataOrNull<T>(path)
+  const isLoaded = writable(preloadedValues != null)
+
+  // Create the forms given the initial values passed to this function.
+  const createFormResult = createForm({
+    initialValues: preloadedValues ?? initialValues,
     validate,
     validationSchema,
     onSubmit: data => writeData(path, data),
   })
 
-  const isLoaded = writable(false)
-
-  const preloadedValues = getPreloadedDataOrNull<T>(path)
-  if (preloadedValues != null) {
-    formResult.form.set(preloadedValues)
-    isLoaded.set(true)
-  } else {
+  if (preloadedValues == null) {
     onMount(async () => {
       const data = await readDataOrNull<T>(path)
-      if (data) formResult.form.set(data)
+      if (data) createFormResult.form.set(data)
       isLoaded.set(true)
     })
   }
 
   return {
-    ...formResult,
+    ...createFormResult,
     isLoaded: isLoaded as Readable<boolean>,
   }
 }
