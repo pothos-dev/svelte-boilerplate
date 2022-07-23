@@ -1,7 +1,7 @@
-import type { RequestEvent, RequestHandler } from "@sveltejs/kit"
+import type { RequestEvent } from "@sveltejs/kit"
 import { createSessionCookie } from "~/lib/firebase/admin"
 
-export async function GET({ url }: RequestEvent) {
+export async function get({ url }: RequestEvent) {
   const idToken = url.searchParams.get("idToken")!
   const session = await createSessionCookie(idToken)
   return {
@@ -12,7 +12,7 @@ export async function GET({ url }: RequestEvent) {
   }
 }
 
-export function DELETE() {
+export function del() {
   return {
     status: 200,
     headers: { "Set-Cookie": "session=; Max-Age=0; Path=/;" },
