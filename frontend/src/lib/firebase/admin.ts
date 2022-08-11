@@ -2,7 +2,6 @@
 
 import serviceAccount from "~/secrets/firebase-admin-credentials.json"
 import { initializeApp, credential, type ServiceAccount } from "firebase-admin"
-import type { DecodedIdToken } from "firebase-admin/lib/auth/token-verifier"
 
 const admin = initializeApp({ credential: credential.cert(serviceAccount as ServiceAccount) })
 
@@ -14,11 +13,14 @@ export async function createSessionCookie(idToken: string) {
 }
 
 // Returns user for session token.
-export async function readSessionCookie(sessionToken: string): Promise<DecodedIdToken | null> {
+export async function readSessionCookie(sessionToken: string) {
   try {
-    return await admin.auth().verifySessionCookie(sessionToken, true)
+    const { email, picture } = await admin.auth().verifySessionCookie(sessionToken, true)
+    return {
+      email: email ?? null,
+      photoURL: picture ?? null,
+    }
   } catch (error) {
-    console.warn(error)
     return null
   }
 }
